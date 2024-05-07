@@ -1,5 +1,27 @@
-<main class="w-full h-screen">
-  <div class="w-full h-[10%]">
+<main
+  class="w-full p-5 h-screen grid grid-rows-8 grid-cols-8 gap-4 bg-slate-800"
+>
+  <section
+    class="bg-blue-400 row-span-8 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
+  >
+    <app-heartbeat></app-heartbeat>
+  </section>
+
+  <section
+    class="bg-yellow-400 row-span-3 col-span-5 rounded-lg border-4 border-lime-300/80 p-5"
+  >
+    <app-cell-loader></app-cell-loader>
+  </section>
+
+  <div
+    class="bg-orange-400 row-span-5 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
+  >
+    <app-temperature></app-temperature>
+  </div>
+
+  <div
+    class="bg-purple-400 row-span-5 col-span-2 rounded-lg border-4 border-lime-300/80 p-5"
+  >
     <app-send-data></app-send-data>
   </div>
 </main>
