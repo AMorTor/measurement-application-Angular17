@@ -1,5 +1,5 @@
 <main
-  class="w-full p-5 h-screen grid grid-rows-8 grid-cols-8 gap-4 bg-slate-800"
+  class="w-full p-20 h-screen grid grid-rows-8 grid-cols-8 gap-8 bg-slate-800"
 >
   <section
     class="bg-blue-400 row-span-8 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
@@ -19,9 +19,16 @@
     <app-temperature></app-temperature>
   </div>
 
-  <div
-    class="bg-purple-400 row-span-5 col-span-2 rounded-lg border-4 border-lime-300/80 p-5"
-  >
-    <app-send-data></app-send-data>
+  <div class="row-span-5 col-span-2 rounded-lg grid grid-rows-8 gap-8">
+    <div
+      class="row-span-3 p-5 bg-violet-500 rounded-lg border-4 border-lime-300/80"
+    >
+      <app-send-data></app-send-data>
+    </div>
+    <div
+      class="row-span-5 p-5 bg-purple-300 rounded-lg border-4 border-lime-300/80"
+    >
+      <app-subject-info></app-subject-info>
+    </div>
   </div>
 </main>

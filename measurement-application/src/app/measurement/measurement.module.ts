@@ -9,6 +9,7 @@ import { HeartbeatComponent } from './components/heartbeat/heartbeat.component';
 import { TemperatureComponent } from './components/temperature/temperature.component';
 import { CellLoaderComponent } from './components/cell-loader/cell-loader.component';
 import { MainViewComponent } from './views/main-view/main-view.component';
+import { SubjectInfoComponent } from './components/subject-info/subject-info.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MainViewComponent } from './views/main-view/main-view.component';
     TemperatureComponent,
     CellLoaderComponent,
     MainViewComponent,
+    SubjectInfoComponent,
   ],
   imports: [CommonModule, FormsModule],
   exports: [MainViewComponent],
