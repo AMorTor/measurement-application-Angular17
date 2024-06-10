@@ -1,34 +1,79 @@
 <main
-  class="w-full p-20 h-screen grid grid-rows-8 grid-cols-8 gap-8 bg-slate-800"
+  class="w-full p-20 h-screen grid grid-rows-12 grid-cols-8 gap-8 bg-slate-800"
 >
+  <!-- Heartbeat  -->
   <section
-    class="bg-blue-400 row-span-8 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
+    class="bg-blue-400 grid grid-rows row-span-12 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
   >
-    <app-heartbeat></app-heartbeat>
+    <div class="row-span-10 border">
+      <app-heartbeat></app-heartbeat>
+    </div>
+    <div class="row-span-1 flex justify-center items-center space-x-8 border">
+      <button
+        class="bg-lime-500/80 text-white rounded-lg w-40 h-9"
+        (click)="enviarNumero(0)"
+      >
+        Start
+      </button>
+      <button
+        class="bg-red-500/80 text-white rounded-lg w-40 h-9"
+        (click)="detenerAccion()"
+      >
+        Stop
+      </button>
+    </div>
   </section>
 
+  <!-- Cell loader  -->
   <section
-    class="bg-yellow-400 row-span-3 col-span-5 rounded-lg border-4 border-lime-300/80 p-5"
+    class="bg-yellow-400 grid grid-rows row-span-5 col-span-5 rounded-lg border-4 border-lime-300/80 p-5"
   >
-    <app-cell-loader></app-cell-loader>
+    <div class="row-span-4 border">
+      <app-cell-loader></app-cell-loader>
+    </div>
+    <div class="row-span-1 flex justify-center items-center space-x-8 border">
+      <button
+        class="bg-lime-500/80 text-white rounded-lg w-40 h-9"
+        (click)="enviarNumero(1)"
+      >
+        Start
+      </button>
+      <button
+        class="bg-red-500/80 text-white rounded-lg w-40 h-9"
+        (click)="detenerAccion()"
+      >
+        Stop
+      </button>
+    </div>
   </section>
 
-  <div
-    class="bg-orange-400 row-span-5 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
+  <!-- Temperature  -->
+  <section
+    class="bg-orange-400 grid grid-rows row-span-7 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
   >
-    <app-temperature></app-temperature>
-  </div>
+    <div class="row-span-6 border">
+      <app-temperature></app-temperature>
+    </div>
+    <div class="row-span-1 flex justify-center items-center space-x-8 border">
+      <button
+        class="bg-lime-500/80 text-white rounded-lg w-40 h-9"
+        (click)="enviarNumero(2)"
+      >
+        Start
+      </button>
+      <button
+        class="bg-red-500/80 text-white rounded-lg w-40 h-9"
+        (click)="detenerAccion()"
+      >
+        Stop
+      </button>
+    </div>
+  </section>
 
-  <div class="row-span-5 col-span-2 rounded-lg grid grid-rows-8 gap-8">
-    <div
-      class="row-span-3 p-5 bg-violet-500 rounded-lg border-4 border-lime-300/80"
-    >
-      <app-send-data></app-send-data>
-    </div>
-    <div
-      class="row-span-5 p-5 bg-purple-300 rounded-lg border-4 border-lime-300/80"
-    >
-      <app-subject-info></app-subject-info>
-    </div>
-  </div>
+  <!-- Subject Info  -->
+  <section
+    class="row-span-7 col-span-2 rounded-lg bg-purple-300 border-4 border-lime-300/80 p-5"
+  >
+    <app-subject-info></app-subject-info>
+  </section>
 </main>

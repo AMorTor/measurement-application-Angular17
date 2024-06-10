@@ -14,36 +14,36 @@ app.use(express.json());
 
 // Configuración del puerto serial
 const port = new SerialPort({
-  path: "COM6",
+  path: "COM4",
   baudRate: 9600,
 });
 const parser = port.pipe(new ReadlineParser({ delimiter: "\n" }));
 
 // Manejador de eventos para los datos recibidos en el puerto serial
+let latestData = "";
+
 parser.on("data", (data) => {
   console.log("Datos recibidos por el puerto serial:", data.toString());
+  latestData = data.toString();
 });
 
 // Ruta para recibir información del cliente
 app.post("/enviar-datos", (req, res) => {
-  const datosRecibidos = req.body;
-  // Aquí puedes procesar los datos recibidos, por ejemplo, enviarlos al puerto serial
-  console.log("Datos recibidos:", datosRecibidos);
+  const { numero } = req.body;
+  console.log("Comando recibido:", numero);
 
-  // Convertimos los datos a una cadena y los enviamos por el puerto serial
-  const dataString = JSON.stringify(datosRecibidos);
-  port.write(dataString, (err) => {
+  port.write(numero.toString(), (err) => {
     if (err) {
       console.error("Error al enviar datos por el puerto serial:", err.message);
       res
         .status(500)
         .json({ error: "Error al enviar datos por el puerto serial" });
     } else {
-      console.log("Datos enviados por el puerto serial correctamente");
-      res.json({
-        message:
-          "Datos recibidos correctamente y enviados por el puerto serial",
-      });
+      console.log("Comando enviado por el puerto serial correctamente");
+      // Espera a recibir datos del PIC
+      setTimeout(() => {
+        res.json({ message: "Datos recibidos del PIC", data: latestData });
+      }, 1000); // Ajusta el tiempo de espera según sea necesario
     }
   });
 });

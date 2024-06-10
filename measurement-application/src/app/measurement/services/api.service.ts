@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:3000'; // Cambia esto si tu servidor Express está en un puerto diferente
+  private baseUrl = 'http://localhost:3000'; //
 
   constructor(private http: HttpClient) {}
 
-  enviarDatos(datos: any) {
-    return this.http.post(`${this.baseUrl}/enviar-datos`, datos);
-  }
-  enviarNumero(numero: number) {
+  enviarNumero(numero: number): Observable<any> {
     const url = `${this.baseUrl}/enviar-datos`;
     return this.http.post(url, { numero });
   }

@@ -1,27 +1,38 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 
+interface ApiResponse {
+  message: string;
+  data: string;
+}
+
 @Component({
   selector: 'main-view',
   templateUrl: './main-view.component.html',
-  styleUrl: './main-view.component.css',
+  styleUrls: ['./main-view.component.css'],
 })
 export class MainViewComponent {
+  datosRecibidos: string = '';
+  errorMessage: string = '';
+
   constructor(private apiService: ApiService) {}
 
-  enviarDatosAlServidor() {
-    const datos = {
-      /* Tus datos aquí */
-    };
-    this.apiService.enviarDatos(datos).subscribe(
-      (response) => {
+  enviarNumero(numero: number) {
+    this.apiService.enviarNumero(numero).subscribe(
+      (response: ApiResponse) => {
         console.log('Respuesta del servidor:', response);
-        // Aquí puedes manejar la respuesta del servidor
+        this.datosRecibidos = response.data;
+        this.errorMessage = ''; // Clear any previous error message
       },
       (error) => {
         console.error('Error al enviar datos:', error);
-        // Aquí puedes manejar los errores
+        this.errorMessage =
+          'Error al enviar datos al servidor. Por favor, inténtelo de nuevo.';
       }
     );
+  }
+
+  detenerAccion() {
+    console.log('Acción detenida');
   }
 }
