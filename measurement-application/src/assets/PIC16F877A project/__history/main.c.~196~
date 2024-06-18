@@ -96,7 +96,7 @@ void timer_2() {
 }
 
 void detectFlanco() {
-    set_adc_channel(3); // Selecciona el canal ADC 2 (AN2)
+    set_adc_channel(2); // Selecciona el canal ADC 2 (AN2)
     adc_port = read_adc(); // Lee el valor del ADC
 
     // Detecta un flanco de subida (de bajo a alto)
@@ -126,24 +126,16 @@ void init_pwm(){
       init_adc(1);
       duty = adc_port;
       set_pwm1_duty(duty);
-      delay_ms(1000);
+      delay_us(20);
       init_adc(0);
-      if(temperature >= 0 & temperature < 0.340){ // de 0°C a 30°C
-         printf("La temperatura es: %2.2f - 0-30 grados\r\n",temperature);
-         //Giro a la izquierda
-         output_b(0x01);
-      } else if(temperature > 0.340 & temperature < 0.540){
-         printf("La temperatura es: %2.2f y - 31-50 grados\r\n",temperature);
-         // No hace nada
-         output_b(0x00);
+      if(temperature > 0 & temperature < 0.340){ // de 0°C a 30°C
+         printf("La temperatura es: %2.2f y esta entre 0-30 grados\r\n",temperature);
+      } else if(temperature > 390 & temperature < 0.540){
+         printf("La temperatura es: %2.2f y esta entre 31-50 grados\r\n",temperature);
       } else if(temperature > 0.540 & temperature < 1.04) {
-         printf("La temperatura es: %2.2f - 51-100 grados\r\n",temperature);
-         //Giro a la derecha 
-         output_b(0x02);
+         printf("La temperatura es: %2.2f y esta entre 0-30 grados\r\n",temperature);
       }else if(temperature > 1.04){
          printf("ALERTAAAAA!!  %2.2f\r\n",temperature);
-         output_b(0x04);
-         output_toggle(PIN_B2);
       }
    }
 }

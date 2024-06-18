@@ -1,5 +1,5 @@
 #include <16F877A.h>
-#device ADC=10
+#device ADC=16
 
 #FUSES NOWDT                    //No Watch Dog Timer
 #FUSES NOBROWNOUT               //No brownout reset
@@ -7,5 +7,4 @@
 
 #use delay(crystal=4MHz,restart_wdt)
 #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
-
 

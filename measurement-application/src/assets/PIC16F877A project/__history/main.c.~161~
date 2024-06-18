@@ -6,8 +6,6 @@ void handleTemperature();
 void handleWeight();
 void handleHeartbeat();
 void detectFlanco();
-void init_pwm();
-void checkTemperature(float temperature);
 
 // Variables globales y definiciones 
 
@@ -21,6 +19,7 @@ int16 count_10s = 0;
 
 // Variables para leer el ADC y detectar flancos
 int16 adc_port;
+float adc_output;
 int16 prev_adc_port = 0;
 int flanco_count = 0;
 int heart_rate = 0;
@@ -28,9 +27,6 @@ int heart_rate = 0;
 // Variables para PWM
 int16 duty;
 int pwm_timer, poscaler;
-
-// Para el manejo de la temperatura
-float temperature;
 
 void main() {
     set_tris_b(0x00); // Configura el puerto B como salida
@@ -58,15 +54,12 @@ void serial_isr() {
         case '0':
             handleTemperature();
             break;
-            
         case '1':
             handleWeight();
             break;
-            
         case '2':
             handleHeartbeat();
             break;
-            
         default:
             printf("Carácter no reconocido: %c\r\n", received_char);
             break;
@@ -96,7 +89,7 @@ void timer_2() {
 }
 
 void detectFlanco() {
-    set_adc_channel(3); // Selecciona el canal ADC 2 (AN2)
+    set_adc_channel(2); // Selecciona el canal ADC 2 (AN2)
     adc_port = read_adc(); // Lee el valor del ADC
 
     // Detecta un flanco de subida (de bajo a alto)
@@ -111,50 +104,22 @@ void detectFlanco() {
 void init_adc(int channel) {
     set_adc_channel(channel);
     adc_port = read_adc();
-    temperature = adc_port * (5.0 / 1023.0);
 }
 
 void init_pwm(){
-   
-   pwm_timer =  249;
-   poscaler = 1;
-   set_tris_c(0xFE);
-   setup_timer_2(T2_DIV_BY_4, pwm_timer, poscaler);
-   setup_ccp1(ccp_pwm);
-   duty = 0;
-   while(true){
-      init_adc(1);
-      duty = adc_port;
-      set_pwm1_duty(duty);
-      delay_ms(1000);
-      init_adc(0);
-      if(temperature >= 0 & temperature < 0.340){ // de 0°C a 30°C
-         printf("La temperatura es: %2.2f - 0-30 grados\r\n",temperature);
-         //Giro a la izquierda
-         output_b(0x01);
-      } else if(temperature > 0.340 & temperature < 0.540){
-         printf("La temperatura es: %2.2f y - 31-50 grados\r\n",temperature);
-         // No hace nada
-         output_b(0x00);
-      } else if(temperature > 0.540 & temperature < 1.04) {
-         printf("La temperatura es: %2.2f - 51-100 grados\r\n",temperature);
-         //Giro a la derecha 
-         output_b(0x02);
-      }else if(temperature > 1.04){
-         printf("ALERTAAAAA!!  %2.2f\r\n",temperature);
-         output_b(0x04);
-         output_toggle(PIN_B2);
-      }
-   }
+  
 }
-
-
-
 void handleTemperature() {
     // Implementa el manejo de la temperatura aquí
     printf("Manejo de la temperatura\r\n");
-    init_pwm();
-    
+     pwm_timer =  249;
+   poscaler = 1;
+   set_tris_c(0xFE);
+   setup_timer_2(T2_DIV_BY_4, pwm_timer, poscaler);
+   setup_cc1(ccp_pwm);
+   duty = 0;
+    init_adc();
+    duty = adc_port;
 }
 
 void handleWeight() {

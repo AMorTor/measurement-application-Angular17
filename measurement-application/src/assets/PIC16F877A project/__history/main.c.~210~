@@ -126,7 +126,7 @@ void init_pwm(){
       init_adc(1);
       duty = adc_port;
       set_pwm1_duty(duty);
-      delay_ms(1000);
+      delay_us(20);
       init_adc(0);
       if(temperature >= 0 & temperature < 0.340){ // de 0°C a 30°C
          printf("La temperatura es: %2.2f - 0-30 grados\r\n",temperature);

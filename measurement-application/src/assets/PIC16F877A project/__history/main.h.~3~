@@ -8,4 +8,6 @@
 #use delay(crystal=4MHz,restart_wdt)
 #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
 
-
+#INT_TIMER0 // Declarar la interrupción del Timer0
+#INT_TIMER1 // Declarar la interrupción del Timer1
+#INT_RDA // Declarar la interrupción del puerto serial (para recibir datos)
