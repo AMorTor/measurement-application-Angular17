@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { Subscription } from 'rxjs';
 
 interface ApiResponse {
   message: string;
@@ -14,8 +15,23 @@ interface ApiResponse {
 export class MainViewComponent {
   datosRecibidos: string = '';
   errorMessage: string = '';
+  datos: any;
+  private pollingSubscription: Subscription = new Subscription();
+  animatedHeart = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.pollingSubscription = this.apiService.obtenerDatosPeriodicamente(500).subscribe(
+      (response) => {
+        this.datos = response.data;
+        console.log('Datos recibidos:', this.datos);
+      },
+      (error) => {
+        console.error('Error al obtener datos:', error);
+      }
+    );
+  }
 
   enviarNumero(numero: number) {
     this.apiService.enviarNumero(numero).subscribe(
@@ -30,9 +46,23 @@ export class MainViewComponent {
           'Error al enviar datos al servidor. Por favor, inténtelo de nuevo.';
       }
     );
+    this.animatedHeart = !this.animatedHeart;
   }
 
   detenerAccion() {
     console.log('Acción detenida');
+    this.animatedHeart = !this.animatedHeart;
   }
+
+
+
+
+
+  ngOnDestroy() {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+    }
+  }
+
+
 }

@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Configuración del puerto serial
 const port = new SerialPort({
-  path: "COM6",
+  path: "COM4",
   baudRate: 9600,
 });
 const parser = port.pipe(new ReadlineParser({ delimiter: "\n" }));
@@ -43,9 +43,14 @@ app.post("/enviar-datos", (req, res) => {
       // Espera a recibir datos del PIC
       setTimeout(() => {
         res.json({ message: "Datos recibidos del PIC", data: latestData });
-      }, 1000); // Ajusta el tiempo de espera según sea necesario
+      }, 1); // Ajusta el tiempo de espera según sea necesario
     }
   });
+});
+
+// Ruta para obtener la última data recibida
+app.get("/obtener-datos", (_req, res) => {
+  res.json({ data: latestData });
 });
 
 // Manejador de ruta para cualquier otra solicitud
