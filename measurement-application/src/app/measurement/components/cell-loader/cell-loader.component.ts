@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './cell-loader.component.css'
 })
 export class CellLoaderComponent {
-
+  weigth: string = '00.00';
 }

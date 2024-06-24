@@ -1,1 +1,34 @@
-<p>cell-loader works!</p>
+<main class="w-full h-full">
+  <section class="w-full h-4/6">
+    <div class="w-full h-full flex justify-center items-center">
+      <div class="flex flex-col items-center justify-center h-1/2">
+        <!-- Plataforma de pesaje -->
+        <div class="w-64 h-8 bg-gray-200 rounded-t-lg"></div>
+        <!-- Rectángulos encima del trapecio -->
+        <div class="w-40 h-4 bg-blue-400 mb-1"></div>
+        <div class="w-48 h-4 bg-blue-500 mb-1"></div>
+        <!-- Base de la báscula con trapecio y esquinas redondeadas -->
+        <div class="relative w-72 h-48 bg-blue-500 trapezoid rounded-b-lg">
+          <!-- Pantalla -->
+          <div
+            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white w-32 h-16 flex items-center justify-center rounded-lg shadow-md"
+          >
+            <span class="text-2xl font-mono">{{ weigth }}</span>
+          </div>
+        </div>
+        <!-- Patas de la báscula -->
+        <div class="relative w-full flex justify-around mt-1">
+          <div class="w-12 h-4 bg-gray-500 rounded-t-lg"></div>
+          <div class="w-12 h-4 bg-gray-500 rounded-t-lg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="w-full h-2/6 flex justify-evenly items-center">
+    <button
+      class="max-w-44 w-44 text-black font-bold py-2 px-4 rounded shadow-lg border-2 border-green-500/50 hover:border-green-700 focus:border-green-400 transition-transform transform hover:scale-105 active:bg-green-600 focus:outline-none"
+    >
+      Start
+    </button>
+  </section>
+</main>

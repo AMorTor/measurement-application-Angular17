@@ -1,84 +1,46 @@
 <main
-  class="w-full p-20 h-screen grid grid-rows-12 grid-cols-8 gap-8 bg-slate-800"
+  class="w-full p-20 h-screen flex justify-center items-center gap-8 bg-blue-50"
 >
-  <!-- Heartbeat  -->
+  <!-- Heartbeat -->
   <section
-    class="bg-blue-950/80 grid grid-rows row-span-12 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
+    class="flex flex-col flex-grow-0 flex-shrink-0 basis-1/3 h-3/6 rounded-lg shadow-lg bg-white p-6"
   >
-    <div class="row-span-10">
-      <div *ngIf="animatedHeart" class="w-full h-full">
-        <app-heartbeat></app-heartbeat>
-      </div>
-      <div *ngIf="!animatedHeart" class="w-full h-full">
-        <app-only-aheart></app-only-aheart>
-      </div>
+    <div>
+      <h2 class="text-xl font-semibold text-gray-900">Heartbeat</h2>
     </div>
-    <div class="row-span-1 flex justify-center items-center space-x-8">
-      <button
-        class="bg-lime-500/80 text-white rounded-lg w-40 h-9"
-        (click)="enviarNumero(2)"
-      >
-        Start
-      </button>
-      <button
-        class="bg-red-500/80 text-white rounded-lg w-40 h-9"
-        (click)="detenerAccion()"
-      >
-        Stop
-      </button>
+    <div class="flex-grow">
+      <app-heartbeat></app-heartbeat>
     </div>
   </section>
 
-  <!-- Cell loader  -->
+  <!-- Cell loader -->
   <section
-    class="bg-yellow-400 grid grid-rows row-span-5 col-span-5 rounded-lg border-4 border-lime-300/80 p-5"
+    class="flex flex-col flex-grow-0 flex-shrink-0 basis-1/3 h-3/6 rounded-lg shadow-lg bg-white p-6"
   >
-    <div class="row-span-4">
+    <div>
+      <h2 class="text-xl font-semibold text-gray-900">Cell Loader</h2>
+    </div>
+    <div class="flex-grow">
       <app-cell-loader></app-cell-loader>
     </div>
-    <div class="row-span-1 flex justify-center items-center space-x-8">
-      <button
-        class="bg-lime-500/80 text-white rounded-lg w-40 h-9"
-        (click)="enviarNumero(1)"
-      >
-        Start
-      </button>
-      <button
-        class="bg-red-500/80 text-white rounded-lg w-40 h-9"
-        (click)="detenerAccion()"
-      >
-        Stop
-      </button>
-    </div>
   </section>
 
-  <!-- Temperature  -->
+  <!-- Temperature -->
   <section
-    class="bg-orange-400 grid grid-rows row-span-7 col-span-3 rounded-lg border-4 border-lime-300/80 p-5"
+    class="flex flex-col flex-grow-0 flex-shrink-0 basis-1/3 h-3/6 rounded-lg shadow-lg bg-white p-6"
   >
-    <div class="row-span-6">
+    <div>
+      <h2 class="text-xl font-semibold text-gray-900">Temperature</h2>
+    </div>
+    <div class="flex-grow">
       <app-temperature></app-temperature>
     </div>
-    <div class="row-span-1 flex justify-center items-center space-x-8">
-      <button
-        class="bg-lime-500/80 text-white rounded-lg w-40 h-9"
-        (click)="enviarNumero(0)"
-      >
-        Start
-      </button>
-      <button
-        class="bg-red-500/80 text-white rounded-lg w-40 h-9"
-        (click)="detenerAccion()"
-      >
-        Stop
-      </button>
-    </div>
   </section>
 
-  <!-- Subject Info  -->
-  <section
-    class="row-span-7 col-span-2 rounded-lg bg-purple-300 border-4 border-lime-300/80 p-5"
-  >
-    <app-subject-info></app-subject-info>
-  </section>
+  <!-- Subject Info -->
+  <!-- <section class="flex flex-col flex-grow-0 flex-shrink-0 basis-1/6 h-5/6 rounded-lg shadow-lg bg-white">
+    <div class="w-full h-full p-6">
+      <h2 class="text-xl font-semibold text-gray-900">Información de la Materia</h2>
+    </div>
+  </section> -->
 </main>

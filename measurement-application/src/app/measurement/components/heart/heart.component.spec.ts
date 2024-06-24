@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OnlyAHeartComponent } from './only-aheart.component';
+import { HeartComponent } from './heart.component';
 
-describe('OnlyAHeartComponent', () => {
-  let component: OnlyAHeartComponent;
-  let fixture: ComponentFixture<OnlyAHeartComponent>;
+describe('HeartComponent', () => {
+  let component: HeartComponent;
+  let fixture: ComponentFixture<HeartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OnlyAHeartComponent]
+      declarations: [HeartComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(OnlyAHeartComponent);
+    fixture = TestBed.createComponent(HeartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -13,11 +13,12 @@ interface ApiResponse {
   styleUrls: ['./main-view.component.css'],
 })
 export class MainViewComponent {
-  datosRecibidos: string = '';
+  receivedData: string = '';
   errorMessage: string = '';
-  datos: any;
+  datos: string = '';
+  sentNumber: number = 0;
   private pollingSubscription: Subscription = new Subscription();
-  animatedHeart = false;
+  heartState = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -33,36 +34,10 @@ export class MainViewComponent {
     );
   }
 
-  enviarNumero(numero: number) {
-    this.apiService.enviarNumero(numero).subscribe(
-      (response: ApiResponse) => {
-        console.log('Respuesta del servidor:', response);
-        this.datosRecibidos = response.data;
-        this.errorMessage = ''; // Clear any previous error message
-      },
-      (error) => {
-        console.error('Error al enviar datos:', error);
-        this.errorMessage =
-          'Error al enviar datos al servidor. Por favor, inténtelo de nuevo.';
-      }
-    );
-    this.animatedHeart = !this.animatedHeart;
-  }
-
-  detenerAccion() {
-    console.log('Acción detenida');
-    this.animatedHeart = !this.animatedHeart;
-  }
-
-
-
-
-
   ngOnDestroy() {
     if (this.pollingSubscription) {
       this.pollingSubscription.unsubscribe();
     }
   }
-
 
 }

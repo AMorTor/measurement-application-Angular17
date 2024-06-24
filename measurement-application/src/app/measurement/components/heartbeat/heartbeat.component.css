@@ -1,46 +1,69 @@
 .heart {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   background: #f20044;
   position: relative;
   transform: rotate(-45deg);
-  box-shadow: -10px 10px 90px #f20044;
+
   animation: heart 0.6s ease-out infinite;
 }
 
 .heart::before {
   content: "";
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   background: #f20044;
   top: -50%;
   border-radius: 100%;
-  box-shadow: -10px -10px 90px #f20044;
 }
 
 .heart::after {
   content: "";
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   background: #f20044;
   right: -50%;
   border-radius: 100%;
-  box-shadow: 10px 10px 90px #f20044;
 }
 
 @keyframes heart {
   0% {
     transform: scale(0.8) rotate(-45deg);
-    box-shadow: -10px 10px 90px #f20044;
   }
   50% {
     transform: scale(1) rotate(-45deg);
-    box-shadow: -10px 10px 90px #f20044;
   }
   100% {
     transform: scale(0.8) rotate(-45deg);
-    box-shadow: -10px 10px 90px #f20044;
   }
+}
+
+.quietheart {
+  width: 100px;
+  height: 100px;
+  background: #f20044;
+  position: relative;
+  transform: rotate(-45deg);
+}
+
+.quietheart::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: #f20044;
+  top: -50%;
+  border-radius: 100%;
+}
+
+.quietheart::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: #f20044;
+  right: -50%;
+  border-radius: 100%;
 }

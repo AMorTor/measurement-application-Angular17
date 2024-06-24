@@ -1,1 +1,50 @@
-<p>temperature works!</p>
+<div class="flex-col flex justify-center items-center w-full h-full">
+  <section class="w-full h-4/6 flex-col flex justify-end items-center">
+    <!-- Fuego -->
+    <div class="relative w-32 h-full flex justify-center">
+      <!-- Llama 1 -->
+      <div
+        class="absolute -bottom-5 w-20 h-36 bg-yellow-500 opacity-70 rounded-xl animate-flame"
+        style="clip-path: polygon(40% 0%, 0% 100%, 100% 100%)"
+      ></div>
+      <div
+        class="absolute -bottom-5 w-20 h-32 bg-yellow-500 opacity-70 rounded-xl animate-flame"
+        style="clip-path: polygon(60% 0%, 0% 100%, 100% 100%)"
+      ></div>
+      <!-- Llama 2 -->
+      <div
+        class="absolute left-[35px] -bottom-5 w-14 h-24 bg-orange-500 opacity-70 rounded-xl animate-flame animation-delay-200"
+        style="clip-path: polygon(60% 0%, 0% 100%, 100% 100%)"
+      ></div>
+      <div
+        class="absolute left-[35px] -bottom-5 w-14 h-20 bg-orange-500 opacity-70 rounded-xl animate-flame animation-delay-200"
+        style="clip-path: polygon(40% 0%, 0% 100%, 100% 100%)"
+      ></div>
+
+      <div
+        class="absolute left-[47px] -bottom-5 w-8 h-12 bg-red-500 opacity-70 rounded-xl animate-flame animation-delay-400"
+        style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)"
+      ></div>
+      <div
+        class="absolute left-[55px] -bottom-5 w-4 h-8 bg-red-600 opacity-70 rounded-xl animate-flame animation-delay-400"
+        style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)"
+      ></div>
+    </div>
+    <!-- Troncos -->
+    <div class="w-32 h-32 flex justify-center -bottom-20">
+      <div
+        class="w-16 h-6 bg-brown-800 transform -rotate-12 -translate-x-0 translate-y-5"
+      ></div>
+      <div
+        class="w-16 h-6 bg-brown-800 transform rotate-12 translate-x-0 translate-y-5"
+      ></div>
+    </div>
+  </section>
+  <section class="w-full h-2/6 flex justify-evenly items-center">
+    <button
+      class="max-w-44 w-44 text-black font-bold py-2 px-4 rounded shadow-lg border-2 border-green-500/50 hover:border-green-700 focus:border-green-400 transition-transform transform hover:scale-105 active:bg-green-600 focus:outline-none"
+    >
+      Start
+    </button>
+  </section>
+</div>
