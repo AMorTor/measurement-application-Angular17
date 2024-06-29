@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Subscription } from 'rxjs';
 
@@ -10,9 +10,9 @@ interface ApiResponse {
 @Component({
   selector: 'app-heartbeat',
   templateUrl: './heartbeat.component.html',
-  styleUrl: './heartbeat.component.css'
+  styleUrls: ['./heartbeat.component.css'] // Cambié styleUrl a styleUrls
 })
-export class HeartbeatComponent {
+export class HeartbeatComponent implements OnDestroy {
   receivedData: any;
   errorMessage: string = '';
   sentNumber: number = -1;
@@ -25,6 +25,7 @@ export class HeartbeatComponent {
   activateHeartAnimation() {
     this.heartState = !this.heartState;
     this.enviarNumero(2);
+    this.islistening(); // Asegurarse de verificar el estado de la suscripción después de cambiar heartState
   }
 
   enviarNumero(numero: number) {
@@ -56,8 +57,17 @@ export class HeartbeatComponent {
       }
     );
   }
+
   islistening() {
-    if (this.heartState == false) {
+    if (!this.heartState) {
+      this.pollingSubscription.unsubscribe();
+      console.log('Se ha detenido la escucha');
+    }
+  }
+
+  ngOnDestroy() {
+    // Cancelar la suscripción cuando el componente se destruya para evitar fugas de memoria
+    if (this.pollingSubscription) {
       this.pollingSubscription.unsubscribe();
     }
   }

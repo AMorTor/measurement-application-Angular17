@@ -1,8 +1,8 @@
-C L "handleHeartbeat" 0 3 1 "FUNCTION"
-D G "__PCM__" 0 175 ""5.015""
-D G "__DEVICE__" 0 175 "877"
-D G "__DATE__" 0 175 ""14-Jun-24""
-D G "__TIME__" 0 175 ""11:49:48"" "Standard Header file for the PIC16F877A device ////////////////"
+D G "SAMPLE_INTERVAL" 0 17 "1" "Intervalo de muestreo del ADC en milisegundos"
+D G "__PCM__" 0 193 ""5.015""
+D G "__DEVICE__" 0 193 "877"
+D G "__DATE__" 0 193 ""28-Jun-24""
+D G "__TIME__" 0 193 ""21:31:37"" "Standard Header file for the PIC16F877A device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 37 "int8" `54 
 f B "set_tris_a" 2 37 "void(int8 value)" `53 
@@ -777,73 +777,78 @@ d G "INT_BUSCOL" 2 665 "0x008D08"
 d G "INT_EEPROM" 2 666 "0x008D10"
 d G "INT_TIMER0" 2 667 "0x000B20"
 d G "INT_COMP" 2 668 "0x008D40"
-C L "jump_to_irs" 0 3 1 "FUNCTION"
-V L "channel" 0 4 "int8" `625 
-f G "init_adc" 0 4 "void(int8 channel)" `624 
-f G "handleTemperature" 0 5 "void()" `626 
-f G "handleWeight" 0 6 "void()" `627 
-f G "handleHeartbeat" 0 7 "void()" `628 
-f G "detectFlanco" 0 8 "void()" `629 
-f G "init_pwm" 0 9 "void()" `630 
-V L "temperature" 0 10 "float" `632 
-f G "checkTemperature" 0 10 "void(float temperature)" `631  "Variables globales y definiciones"
-D G "REPEAT_TIME_WINDOW" 0 15 "19" "10 segundos en milisegundos"
-D G "SAMPLE_INTERVAL" 0 16 "1" "Intervalo de muestreo del ADC en milisegundos"
-C L "checkTemperature" 0 3 1 "FUNCTION"
-V G "count_1ms" 0 19 "int16" `633 
-V G "count_10s" 0 20 "int16" `634 
-C L "checkTemperature" 0 3 1 "FUNCTION"
-V G "adc_port" 0 23 "int16" `635 
-V G "prev_adc_port" 0 24 "int16" `636 
-V G "flanco_count" 0 25 "int8" `637 
-V G "heart_rate" 0 26 "int8" `638 
-C L "checkTemperature" 0 3 1 "FUNCTION"
-V G "duty" 0 29 "int16" `639 
-V G "pwm_timer" 0 30 "int8" `640 
-V G "poscaler" 0 30 "int8" `641  "Para el manejo de la temperatura"
-V G "temperature" 0 33 "float" `642 
-F G "main" 0 35 "void()" `643 
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-C L "main" 0 3 1 "FUNCTION"
-F G "serial_isr" 0 54 "void()" `646 
-V L "received_char" 0 55 "int8" `647 
-C L "serial_isr" 0 3 1 "FUNCTION"
-F G "timer_1" 0 77 "void()" `651 
-C L "timer_1" 0 3 1 "FUNCTION"
-C L "timer_1" 0 3 1 "FUNCTION"
-C L "timer_1" 0 3 1 "FUNCTION"
-C L "timer_1" 0 3 1 "FUNCTION"
-C L "timer_1" 0 3 1 "FUNCTION"
-C L "timer_1" 0 3 1 "FUNCTION"
-F G "timer_2" 0 90 "void()" `662 
-C L "timer_2" 0 3 1 "FUNCTION"
-C L "timer_2" 0 3 1 "FUNCTION"
-C L "timer_2" 0 3 1 "FUNCTION"
-F G "detectFlanco" 0 98 "void()" `629 
-C L "detectFlanco" 0 3 1 "FUNCTION"
-C L "detectFlanco" 0 3 2 "FUNCTION"
-C L "detectFlanco" 0 3 1 "FUNCTION"
-C L "detectFlanco" 0 3 1 "FUNCTION"
-C L "detectFlanco" 0 3 1 "FUNCTION"
-V L "channel" 0 111 "int8" `665 
-F G "init_adc" 0 111 "void(int8 channel)" `624 
-F G "init_pwm" 0 117 "void()" `630 
-C L "init_pwm" 0 3 1 "FUNCTION"
-C L "init_pwm" 0 3 1 "FUNCTION"
-C L "init_pwm" 0 3 1 "FUNCTION"
-C L "init_pwm" 0 3 1 "FUNCTION"
-F G "handleTemperature" 0 153 "void()" `626  "Implementa el manejo de la temperatura aquí"
-F G "handleWeight" 0 160 "void()" `627  "Implementa el manejo del peso aquí"
-F G "handleHeartbeat" 0 165 "void()" `628  "Implementa el manejo del ritmo cardíaco aquí"
-C L "handleHeartbeat" 0 3 1 "FUNCTION"
-C L "handleHeartbeat" 0 3 1 "FUNCTION"
+D G "ERROR" 0 2 "0"
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V L "channel" 0 5 "int8" `625 
+f G "init_adc" 0 5 "void(int8 channel)" `624 
+f G "handleTemperature" 0 6 "void()" `626 
+f G "handleWeight" 0 7 "void()" `627 
+f G "handleHeartbeat" 0 8 "void()" `628 
+f G "detectFlanco" 0 9 "void()" `629 
+f G "init_pwm" 0 10 "void()" `630 
+V L "temperature" 0 11 "float" `632 
+f G "checkTemperature" 0 11 "void(float temperature)" `631  "Variables globales y definiciones"
+D G "REPEAT_TIME_WINDOW" 0 16 "19" "10 segundos en milisegundos"
+D G "SAMPLE_INTERVAL" 0 17 "1" "Intervalo de muestreo del ADC en milisegundos"
+C L "checkTemperature" 0 4 1 "FUNCTION"
+V G "count_1ms" 0 20 "int16" `633 
+V G "count_10s" 0 21 "int16" `634 
+C L "checkTemperature" 0 4 1 "FUNCTION"
+V G "adc_port" 0 24 "int16" `635 
+V G "prev_adc_port" 0 25 "int16" `636 
+V G "flanco_count" 0 26 "int8" `637 
+V G "heart_rate" 0 27 "int8" `638 
+C L "checkTemperature" 0 4 1 "FUNCTION"
+V G "duty" 0 30 "int16" `639 
+V G "pwm_timer" 0 31 "int8" `640 
+V G "poscaler" 0 31 "int8" `641  "Para el manejo de la temperatura"
+V G "voltage" 0 34 "float" `642 
+V G "temperature" 0 35 "float" `643 
+V G "weigth" 0 36 "float" `644 
+F G "main" 0 38 "void()" `645 
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+C L "main" 0 4 1 "FUNCTION"
+F G "serial_isr" 0 58 "void()" `650 
+V L "received_char" 0 59 "int8" `651 
+C L "serial_isr" 0 4 1 "FUNCTION"
+F G "timer_1" 0 81 "void()" `655 
+C L "timer_1" 0 4 1 "FUNCTION"
+C L "timer_1" 0 4 1 "FUNCTION"
+C L "timer_1" 0 4 1 "FUNCTION"
+C L "timer_1" 0 4 1 "FUNCTION"
+C L "timer_1" 0 4 1 "FUNCTION"
+C L "timer_1" 0 4 1 "FUNCTION"
+F G "timer_2" 0 94 "void()" `666 
+C L "timer_2" 0 4 1 "FUNCTION"
+C L "timer_2" 0 4 1 "FUNCTION"
+C L "timer_2" 0 4 1 "FUNCTION"
+F G "detectFlanco" 0 102 "void()" `629 
+C L "detectFlanco" 0 4 1 "FUNCTION"
+C L "detectFlanco" 0 4 2 "FUNCTION"
+C L "detectFlanco" 0 4 1 "FUNCTION"
+C L "detectFlanco" 0 4 1 "FUNCTION"
+C L "detectFlanco" 0 4 1 "FUNCTION"
+V L "channel" 0 115 "int8" `669 
+F G "init_adc" 0 115 "void(int8 channel)" `624 
+F G "init_pwm" 0 123 "void()" `630 
+C L "init_pwm" 0 4 1 "FUNCTION"
+C L "init_pwm" 0 4 2 "FUNCTION"
+C L "init_pwm" 0 4 1 "FUNCTION"
+C L "init_pwm" 0 4 1 "FUNCTION"
+C L "init_pwm" 0 4 1 "FUNCTION"
+C L "init_pwm" 0 4 1 "FUNCTION"
+F G "handleTemperature" 0 166 "void()" `626  "Implementa el manejo de la temperatura aquí"
+F G "handleWeight" 0 173 "void()" `627  "Implementa el manejo del peso aquí"
+F G "handleHeartbeat" 0 184 "void()" `628  "Implementa el manejo del ritmo cardíaco aquí"
+C L "handleHeartbeat" 0 4 1 "FUNCTION"
+C L "handleHeartbeat" 0 4 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0

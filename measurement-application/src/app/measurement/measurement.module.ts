@@ -10,6 +10,9 @@ import { HeartbeatComponent } from './components/heartbeat/heartbeat.component';
 import { CellLoaderComponent } from './components/cell-loader/cell-loader.component';
 import { TemperatureComponent } from './components/temperature/temperature.component';
 import { HeartComponent } from './components/heart/heart.component';
+import { SnowFlakeComponent } from './components/snow-flake/snow-flake.component';
+import { FlameComponent } from './components/flame/flame.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { HeartComponent } from './components/heart/heart.component';
     HeartbeatComponent,
     CellLoaderComponent,
     TemperatureComponent,
-    HeartComponent
+    HeartComponent,
+    SnowFlakeComponent,
+    FlameComponent,
+    AlertComponent
   ],
   imports: [CommonModule, FormsModule],
   exports: [MainViewComponent],

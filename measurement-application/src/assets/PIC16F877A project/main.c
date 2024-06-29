@@ -1,4 +1,5 @@
 #include <main.h>
+#define ERROR 0
 
 // Prototipo de funciones
 void init_adc(int channel);
@@ -12,8 +13,8 @@ void checkTemperature(float temperature);
 // Variables globales y definiciones 
 
 // ------- Para TIMER1 (ventana de 10 segundos)
-#define REPEAT_TIME_WINDOW 19  // 10 segundos en milisegundos
-#define SAMPLE_INTERVAL 1         // Intervalo de muestreo del ADC en milisegundos
+#define REPEAT_TIME_WINDOW 19       // 10 segundos en milisegundos
+#define SAMPLE_INTERVAL 1           // Intervalo de muestreo del ADC en milisegundos
 
 // Variables para temporizadores y medición de tiempo
 int16 count_1ms = 0;
@@ -30,7 +31,9 @@ int16 duty;
 int pwm_timer, poscaler;
 
 // Para el manejo de la temperatura
+float voltage;
 float temperature;
+float weigth;
 
 void main() {
     set_tris_b(0x00); // Configura el puerto B como salida
@@ -44,6 +47,7 @@ void main() {
     
     setup_adc_ports(ALL_ANALOG); // Configura todos los puertos del ADC como analógicos
     setup_adc(ADC_CLOCK_INTERNAL); // Configura el ADC con reloj interno
+    printf("- Programa iniciado -");
     
     while(TRUE) {
         // Bucle principal del programa
@@ -96,7 +100,7 @@ void timer_2() {
 }
 
 void detectFlanco() {
-    set_adc_channel(3); // Selecciona el canal ADC 2 (AN2)
+    set_adc_channel(2); // Selecciona el canal ADC 2 (AN2)
     adc_port = read_adc(); // Lee el valor del ADC
 
     // Detecta un flanco de subida (de bajo a alto)
@@ -111,7 +115,9 @@ void detectFlanco() {
 void init_adc(int channel) {
     set_adc_channel(channel);
     adc_port = read_adc();
-    temperature = adc_port * (5.0 / 1023.0);
+    voltage = adc_port * (5.0 / 1023.0);
+    temperature = voltage * 100;
+    weigth = voltage + ERROR;
 }
 
 void init_pwm(){
@@ -123,27 +129,34 @@ void init_pwm(){
    setup_ccp1(ccp_pwm);
    duty = 0;
    while(true){
-      init_adc(1);
+      // Lee el adc(3) para determinar la velocidad del motor
+      init_adc(3);
       duty = adc_port;
       set_pwm1_duty(duty);
+      
+      // Lee el adc(0) para determinar la temperatura y con ello,
+      // girar el motor hacia la derecha, izquierda o detenerlo
       delay_ms(1000);
       init_adc(0);
-      if(temperature >= 0 & temperature < 0.340){ // de 0°C a 30°C
-         printf("La temperatura es: %2.2f - 0-30 grados\r\n",temperature);
-         //Giro a la izquierda
+      if(temperature >= 0 & temperature < 30){ // de 0°C a 30°C
+         printf("%2.2f\r\n",temperature);
+         //Giro a la izquierda del motor
          output_b(0x01);
-      } else if(temperature > 0.340 & temperature < 0.540){
-         printf("La temperatura es: %2.2f y - 31-50 grados\r\n",temperature);
+         
+      } else if(temperature > 30 & temperature < 50){
+         printf("%2.2f\r\n",temperature);
          // No hace nada
          output_b(0x00);
-      } else if(temperature > 0.540 & temperature < 1.04) {
-         printf("La temperatura es: %2.2f - 51-100 grados\r\n",temperature);
-         //Giro a la derecha 
+         
+      } else if(temperature > 50 & temperature < 100) {
+         printf("%2.2f\r\n",temperature);
+         //Giro a la derecha del motor
          output_b(0x02);
-      }else if(temperature > 1.04){
-         printf("ALERTAAAAA!!  %2.2f\r\n",temperature);
+         
+      }else if(temperature > 100){
+         printf("%2.2f\r\n",temperature);
          output_b(0x04);
-         output_toggle(PIN_B2);
+         
       }
    }
 }
@@ -160,6 +173,12 @@ void handleTemperature() {
 void handleWeight() {
     // Implementa el manejo del peso aquí
     printf("Manejo del peso\r\n");
+    
+    while(true){
+      init_adc(1);
+      printf("%2.2f\r\n",weigth);
+      delay_ms(400);
+    }
 }
 
 void handleHeartbeat() {
